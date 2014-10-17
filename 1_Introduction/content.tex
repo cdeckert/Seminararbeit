@@ -1,1 +1,28 @@
 \section{Einleitung}
+
+
+Es folgt eine depperte Zusammenfassung von Inroduction
+
+
+1. Wie können Probleme in einzelne Komponenten gesplittet werden, damit sie parallel ausgeführt werden können.
+
+
+Es wird unterschieden zwischen tasks die sich natürlich in mehrere parallele Threads splitten. (Beispiel hierfür sind webServer). Für jeden Request kann ein Thread erstellt werden.
+
+Andere applikationen die sich als Produzenten und Konsulementen teilen lassen gelten ebenfalls als einfach zu paralellisieren. Im folgenden werden wir uns mit Problemen beschäftigen, die nicht so klar strukturiert sind.
+
+Als beispiel wird die Multiplikation zweier Matritzen gewählt. Der einfachste Weg wäre es bei der Multiplikation für jeden EIntrag der Maritze einen eigenen Thread zu starten. Dieses Modell ist jedoch nicht optimal, da für jeden Thread eine gewissen menge an Speicher allokiert werden muss, um dort Bookkeeping informationen zu speichern. Das Erstellen, Scheduling, und zerstören der Threads nimmt einen entscheidenden Teil der Berechnung ein. Das ergebnis, viele kurzlebige Threads sind daher wenig effizeient um multi threading zu organisieren.
+
+
+Ein ansatz um ein solches Problem zu lösen ist die erstellung sog. Task pools. Mehrere kurzlebige Tasks werden in diesen Pool übergeben. Einzelne Worker bedienen sich aus diesem Pool und liefern die berechneten Ergebnisse zurück. Ein weiterer Benefit dieses Systems ist, dass sie unabhängig von externen Faktoren wie uni-core, small-scale und large scale Multiprocessoren verarbeitet werden können. Je nach gegebenem Umfeld kann die optimale Anzahl an workern gestartet werden, die wiederum tasks abarbeiten.
+
+Diese Thread pools werden in Java executor service genannt. Tasks die keine Ergebnisse zurückliefern werden als Runnable objects gespeichert und durchgeführt indem die methode run() aufgerufen wird. Tasks die ein ergebnis zurückliefern werden als Callables implementiert. Diese Services werden per call aufgerufen. Und können sig fucture<t>s zurückliefern. Ein solches Future ist das Versprechen, dass ein gewisses Resultat asynchron geliefert wird, wenn es berechnet wurde. Das Vertrauen, dass ein solches Versprechen eingehalten wird, kann uU enttäuscht werden. Diese Objekte beinhalten eine get() Methode, die das resultat zurückliefern. Ausserdem beinhaltet ein solches Future auch eine Methode um eine task abzubrechen. Das Submitten einer Runnable task retuniert ebenfalls ein Fucture. Das ausführen eines futures garantiert nicht, dass eine task auch tatsächlich parallel ausgeführt wird. Diese methoden sind "advisory". Sie erählen den darunterliegenden Exectuoren, dass sie vielleicht parallel ausgeführt werden könnte.
+
+Im falle der Matritzen multiplikation werden die partitzen in n/2 by n/2 submatrizen gespeichert. Das geisst in Java backed. Diese reflektieren das orginal. 
+
+Die Jobs werden parallel durchgeführt. Jede dieser matritzen kann weiter gespatet werden und dann wieder in einen pool übergeben werden. 
+
+
+Fibunacci beispiel.
+
+
