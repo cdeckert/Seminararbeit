@@ -8,13 +8,19 @@ die minimale Zeit die benötigt wird um die Ausführung eines programms durchzuf
 
 Dann gilt T_p >= T_1 / P
 
-Ein anderes Extrem ist T_inf, die anzahl der schritte des Programms ist unendlich. Das wird critical-path-length genannt weill endliche Resourcen nicht besser sein können als unendliche Ressourcen. T_P >= T_inf.
+Ein anderes Extrem ist T_inf, die anzahl der schritte des Programms ist unendlich. Das wird critical-path-length genannt weill endliche Resourcen nicht besser sein können als unendliche Ressourcen. 
+T_P >= T_inf.
 
 
 Der Speedup von P processors ist diese Ratio T_1 / T_P
 
 
-Sagen wir mal eine Berechnung speedup linear wenn T_1/T_P = O(P). Der maximale mögliche SPeedup von Parallelism ist T_1/T_inf. 
+Sagen wir mal eine Berechnung speedup linear wenn 
+T_1/T_P = O(P)
+
+. Der maximale mögliche SPeedup von Parallelism ist 
+
+T_1/T_inf. 
 
 Diese Daten werden anhalt des Matrizenproblems erklärt. Sei A_P(N) die anzahl der schritte die benätigt werden auf P prozessoren. 
 
@@ -24,7 +30,9 @@ Die Work für A_1(n) = A_1(n) = 4A1(n/2)+O(1) = O(n^2)
 Das ist die selbe Arbeit wie notwendig ist bei einem Doppel-Loop.
 
 
-Die kritische Pfadlänge ist gegeben durch A_if(n) = A_inf(n/2)+O(1) = O(log n).
+Die kritische Pfadlänge ist gegeben durch 
+
+A_if(n) = A_inf(n/2)+O(1) = O(log n).
 
 
 Sei also M_P(n) die anzahl der scrhitte die zur Multiplikation von zwei n x n matritzen notwendig sind auf P prozessoren. Dann ist die Arbeit gegebnen durch M_1(n) 
