@@ -1,2 +1,7 @@
 \section{Realistic Multiprocessor Scheduling}
 
+Bisher sind wir davon ausgegangen, dass Mulithreading threads auf P dedizierten Prozessoren laufen. Das ist in der Realität nicht der fall. Nehme man an es stehen zu beginn P Prozessoren zur Verfügung, so kann wäherend des ausführens ein Prozesseor durch das System oder durch andere Programme genutzt werden somit stehen nicht wie ursprünglich P Prozessoren sondern nur noch P-1 Prozessoren zur verfügung.
+
+In modernen Betriebssystemen werden suer level threads that encompass a program counter and a stack. Auch mit eigenem address raum. Dann werden diese häfig als Prozesse benannt. Der OS kernel beinhaltet scheduler die die threads auf physischen Prozessoren laufen lassen. Das Mapping zwischen physischem Prozessor und Thread kann dabei nicht kontrolliert werden.
+
+Dem entsprechend gibt um das loch zwischen user level threas und operationg system-evel prozessoren ein drei level modell
