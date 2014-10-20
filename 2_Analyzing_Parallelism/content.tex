@@ -2,11 +2,16 @@
 
 Multithreaded computation can als directed acyclic graph (DAG) betrachtet werden. Dabei ist jede task ein Node. Diese nodes sind durch Kanten miteinander verbunden und representieren auf der einen seite den Predessor und auf der anderen den Successor einer tasks. Der successor hängt von dem Resultat des Predessesors ab. zB ist die conventinal Threads nur eine chain von Nodes wo jeder Node von einem anderen abhängt. Im gegensatz dazu hängt eine solche task von mehreren Subtasks ab.
 
-Einige Berechnungen lassen sich inherrently mehr parallelisieren als andere. Preziesergesagt nehmen wir an, dass alle indivual berechnungsschritte diese selbe Zeit dauern. Das wird als basis Masstatb genutzt. Sei also 
+Einige Berechnungen lassen sich inherrently mehr parallelisieren als andere. Preziesergesagt nehmen wir an, dass alle indivual berechnungsschritte diese selbe Zeit dauern. Das wird als basis Masstatb genutzt. Sei also
+
 T_P 
+
 die minimale Zeit die benötigt wird um die Ausführung eines programms durchzuführen. Dabei Sei P die menge der dedizierten Prozessoren. 
+
 T_P
+
  gibt somit die Latency an, also die Zeit die es dauert von start bis ende zu laffen. Diese Zeit ist von einem aussenstehenden zu messen. Diese ausf¨hrung kann limitiert sein zB durch die limitierung des Speichers.Einige values von T sind so wichtig, dass sie einen speziellen Namen haben 
+
  T_1,
 
  die numer des Schritts needed um das programm auf einem einzelenen processor auszuführen ist die Brechnungs WORK. Work ist auch die gesamte anzahl an schritten die in einer berechnung benötig werden. 
