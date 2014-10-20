@@ -4,4 +4,17 @@ Bisher sind wir davon ausgegangen, dass Mulithreading threads auf P dedizierten 
 
 In modernen Betriebssystemen werden suer level threads that encompass a program counter and a stack. Auch mit eigenem address raum. Dann werden diese häfig als Prozesse benannt. Der OS kernel beinhaltet scheduler die die threads auf physischen Prozessoren laufen lassen. Das Mapping zwischen physischem Prozessor und Thread kann dabei nicht kontrolliert werden.
 
-Dem entsprechend gibt um das loch zwischen user level threas und operationg system-evel prozessoren ein drei level modell
+Dem entsprechend gibt um das loch zwischen user level threas und operationg system-evel prozessoren ein drei level modell: Auf der obersten Ebene das Multi-Threading programm. Die das Programm in short-lived tasks spaltet. Auf dem Mittleren Level die User-Level Schduler, die diese Tasks auf eine fixe Zahl von Threads mappen und auf dem unteren level der Kernal, der die Threads auf Hardware Prozessoren  mappen. Dabei kann die Applikation selbst keinen Einfluss auf den Kernel nehmen. 
+
+Zur vereinfachung kann man nnehemen, dass der kernel in diskreten schritten arbeitet. Bei Schritt i, der Kernal wählt eine subset von
+
+0 <= p_i <= P
+
+user Level Threads aus um in einem Schritt zu laufen
+
+Der Prozessor Durschnitt P_A
+über T schritte ist definiert als
+
+P_A = 1/T SUM T-1 i = 0 p_i
+
+... Hier noch mehr aus 16.3
