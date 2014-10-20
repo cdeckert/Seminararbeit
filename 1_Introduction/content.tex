@@ -14,24 +14,18 @@ Als Beispiel für ein solches Problem ist die Multiplikation von Matrizen.
 c_ij = \sum{k=0}^{n-1} a_ik * b_kj
 
 
+Die einfachste Möglichkeit dieses Problem zu parallelisieren ist es für jedes einzelne Ergebnis c_ij
+einen eigenen Thread zu starten.
+
+Eine solche Implementierung ist jedoch wenig ideal, vergleichweise viele kurzlebige Threads müssen gestartet und wieder beendet werden. Dadurch tritt nicht nur beim Schedulen der einzelnen Threads, da jeder Thread eine bestimmte Resourcen benötigt wie beispielsweise Arbeitsspeicher, Zeit zum Setup und Teardown eines Thread sowie Scheduler overhead.
+
+Dadurch entsteht eine ungünstiges Verhältnis zwischen zu leistender Arbeit und damit verbundenem Overhead.
+
+Um das Verhältnis zwischen Overhead und eigentlich zu leistender Arbeit zu reduzieren, können Task-Pools eingesetzt werden.
 
 
 
 
-
-
-
-Es folgt eine depperte Zusammenfassung von Inroduction
-
-
-1. Wie können Probleme in einzelne Komponenten gesplittet werden, damit sie parallel ausgeführt werden können.
-
-
-Es wird unterschieden zwischen tasks die sich natürlich in mehrere parallele Threads splitten. (Beispiel hierfür sind webServer). Für jeden Request kann ein Thread erstellt werden.
-
-Andere applikationen die sich als Produzenten und Konsulementen teilen lassen gelten ebenfalls als einfach zu paralellisieren. Im folgenden werden wir uns mit Problemen beschäftigen, die nicht so klar strukturiert sind.
-
-Als beispiel wird die Multiplikation zweier Matritzen gewählt. Der einfachste Weg wäre es bei der Multiplikation für jeden EIntrag der Maritze einen eigenen Thread zu starten. Dieses Modell ist jedoch nicht optimal, da für jeden Thread eine gewissen menge an Speicher allokiert werden muss, um dort Bookkeeping informationen zu speichern. Das Erstellen, Scheduling, und zerstören der Threads nimmt einen entscheidenden Teil der Berechnung ein. Das ergebnis, viele kurzlebige Threads sind daher wenig effizeient um multi threading zu organisieren.
 
 
 Ein ansatz um ein solches Problem zu lösen ist die erstellung sog. Task pools. Mehrere kurzlebige Tasks werden in diesen Pool übergeben. Einzelne Worker bedienen sich aus diesem Pool und liefern die berechneten Ergebnisse zurück. Ein weiterer Benefit dieses Systems ist, dass sie unabhängig von externen Faktoren wie uni-core, small-scale und large scale Multiprocessoren verarbeitet werden können. Je nach gegebenem Umfeld kann die optimale Anzahl an workern gestartet werden, die wiederum tasks abarbeiten.
