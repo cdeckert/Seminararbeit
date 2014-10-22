@@ -1,32 +1,131 @@
 % In your .tex file
 % !TEX program = xelatex
 \documentclass{beamer}
+\usetheme{Copenhagen}
+%\usepackage[ansinew]{inputenc}
+\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+
+\title{Futures, Scheduling und Work Distribution}
+\author{Christian Deckert}
+\date{\today}
+\institute{Universit\"at Mannheim}
+
+
+
+
 \begin{document}
 
+%
+% Title
+%
+\maketitle
 
-\frame{\titlepage}
-
-\begin{frame}
-\frametitle{Agenda}
+%
+% TOC
+%
+\begin{frame}{Agenda}
 \tableofcontents[currentsection]
 \end{frame}
 
 
-\include{./1_Problem/problem.tex}
+%
+% Einführung
+%
+%
+\section{Einf\"uhrung}
 
-\begin{frame}
+\subsection{Problemstellung}
+%
+% Problemstellung
+%
+\begin{frame}{Effektive Implementierung von parallelisierbaren Programmen}{Problemstellung}
 
-\frametitle{Futures, Scheduling, Distribution}
-
+\begin{itemize}
+\item Aufteilung von Problemen in parallelisierbare Komponenten
+\item Effektive Aufteilung der Arbeit
+\item Verwaltung von Threads
+\end{itemize}
 \end{frame}
 
 
-\begin{frame}
+\subsection{Abgrenzung}
+\begin{frame}{Multithreadingstrategien}
 
-\frametitle{Das Problem}
-\framesubtitle{Wie lassen sich Programme }
+Multithreadingstrategien
+\begin{columns}
+    \column{.5\textwidth}
+        \begin{block}{Peer-to-Peer}
+        \begin{itemize}
+            \item kurzlebige Threads
+            \item 1 Aufgabe = 1 Thread
+            \item Threads starten weitere (Sub-)Threads
+        \end{itemize}
+        \end{block}
+    \column{.5\textwidth}
+        \begin{block}{Delegation}
+        \begin{itemize}
+            \item Langlebige Arbeiter-Threads
+            \item Aufgaben-Pools
+            \item Bearbeitung des Aufgaben-Pools durch Arbeiter-Threads
+        \end{itemize}
+        \end{block}
+    
+\end{columns}
 
+\begin{columns}
+    \column{.5\textwidth}
+        \begin{block}{Producer-Consumer}
+        \begin{itemize}
+            \item Producer generiert Daten
+            \item Consumer verarbeitet Daten
+        \end{itemize}
+        \end{block}
+    \column{.5\textwidth}
+        \begin{block}{Pipeline}
+        \begin{itemize}
+            \item Fliessbandfertigung
+            \item Weitergabe der Aufgabe von Thread zu Thread
+        \end{itemize}
+        \end{block}
+    
+\end{columns}
+%http://books.google.de/books?id=k-gyap-yz7EC&pg=PT270&lpg=PT270&dq=delegation+(boss–worker)+example&source=bl&ots=bzZWsbxG4J&sig=lXaPvcv8Na5fWRiVMszcw8jI0g8&hl=de&sa=X&ei=fCRIVPzaHIfhywONnYKICw&ved=0CC0Q6AEwAQ#v=onepage&q=delegation%20(boss–worker)%20example&f=false
 \end{frame}
+
+\begin{frame}{Vorteile von Delegation \"uber Peer-to-Peer}
+
+\begin{columns}
+    \column{.5\textwidth}
+        Peer-to-Peer Nachteile
+        
+        \begin{itemize}
+        \item Kosten f\"ur Memory, Setup, Teardown der Threads
+        \item Hoher Overhead pro Komponente
+        \item kurzlebige Threads
+        \end{itemize}
+    \column{.5\textwidth}
+        Delegations Vorteile
+        \begin{itemize}
+        \item Geringer Overhead pro Komponente
+        \item Trennung von Aufgabe und Ausf\"uhrung
+        \item Langlebige Threads
+        \end{itemize}
+    
+\end{columns}
+\end{frame}
+
+\subsection{Begriffskl\"ahrung: Futures}
+
+\begin{frame}{Abh\"angigkeiten zwischen Aufgaben}
+\begin{itemize}
+\item Aufgaben sind nicht (immer) unabh\"angig
+\item andere Aufgaben m\"ussen abgeschlossen werden
+\item noch unbekannte Ergebnisse werden als Futures bezeichnet
+\end{itemize}
+\end{frame}
+
+
 
 
 
