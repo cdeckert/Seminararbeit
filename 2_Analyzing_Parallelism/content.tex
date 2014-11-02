@@ -1,5 +1,40 @@
 \section{Analyzing Parallelism}
 
+Im folgenden Abschnitt werden basierend auf der Arbeit von Blumofe ein Modell zur Multithreading Berechnung, drei fundameltale Parameter von Multithreading, Arbeit, Berechnungstiefe und Aktivierungstiefe, und darauf basierende Theoreme eingeführt.
+
+Blumofe geht in seiner Arbeit XY davon aus, dass einzelne Aufgaben in eigenen Threads ausgeführt werden. Es handelt sich somit nicht um ein XY sondern um ein YX System, wobei die grundlegende Erkenntnis nicht durch die von Blumofe gewählte Technik beeinträchtigt ist.
+Eine Multithreading Berechnung besteht aus einer Menge von Aufgaben. Jede dieser Aufgaben besteht aus untergeordneten Teilaufgaben, die in aufeinander folgender Reihenfolge durch beispielsweise einen Thread ausgeführt werden. Sobald alle Teilaufgaben erledigt sind, gilt auch die Aufgabe als erledigt. In Abbildung 1 ist sind solche Aufgaben grau hinterlegt dargestellt. Einzelne Teilaufgaben sind als Kreise dargestellt. Sie müssen in sequenzieller Reihenfolge (von links nach rechts) ausgeführt werden, was durch sog. fortfahrenden Kanten dargestellt wird.
+Während des Ausführens einer solchen Aufgabe ist es möglich, dass andere Aufgaben generiert werden, die parallel zur bestehenden Aufgabe ausgeführt werden können. Diese werden als Kinder einer Aufgabe bezeichnet. Bei der Erstellung einer solchen Kind-Aufgabe wird im Arbeitsspeicher eine gewisse Menge an Platz reserviert, der als Aktivierungs-Datenblock bezeichnet wird. Dieser wird erst wieder freigegeben sobald Zur Berechnung einer Aufgabe ist es möglich, dass Ergebnisse der Kinder-Aufgaben herangezogen werden sog. Daten-Abhängigkeitskanten. In Abbildung 1 ist die Erstellung einer solchen Kind-Aufgabe und das zurückliefen eines Ergebnisses zwischen den Knoten X1 und X2 bzw. X3 und X4 durch einen Pfeil gekennzeichnet.
+Eine Teilaufgabe bzw. Aufgabe ist erst dann bereit fertiggestellt zu werden, falls alle vorherigen (Teil-)Aufgaben bereits beendet wurden. Eine Ausführungsreihenfolge der einzelnen Aufgaben, die dies sicherstellt wird als korrekte Ausführungsreihenfolge bezeichnet. 
+
+Basierend auf diesem Baum können die verschiedenen Parameter eines Mutlithreading Programms (Arbeit, Berechnungstiefe und Aktivierungstiefe) beschrieben werden. Zuerst wird der Begriff der Arbeit und Berechnungstiefe eingeführt. Beide Begriffe stehen in Beziehung zur eigentlichen Ausführungszeit, danach kontentieren wir uns auf die Aktivierungstiefe, die mit dem benötigten Speicher in Beziehung steht.
+
+Die Parameter Arbeit und Berechnungstiefe basieren auf dem bereits dargestellten Graphstruktur einer Multithread-Berechnung. Basierend auf den Abhängigkeiten zwischen den Teilaufgaben und den Teilaufgaben selbst kann ein azyklischer gerichterter Graph gebildet werden (Abbildung 2). Als Arbeit wird in einem solchen Graphen die Gesamtanzahl aller Teilaufgaben bezeichnet. Sie entspricht der Anzahl der Berechnungsschritte, die durch einen einzelnen Prozessor benötigt wird. Die Anzahl der Teilaufgaben auf dem längsten gerichteten Pfad (kritischer Pfad) wird als Berechnungstiefe bezeichnet.
+
+Die Zeit, die zur Ausführung eines Programmes benötigt wird, lässt sich quantifizieren durch die Ausführungszeit auf $P$-Prozessoren. Wobei ein Prozessor genau eine Aufgabe gleichteitig durchführen kann. Daher sei die Zeit, die zur Berechnung einer Aufgabe von $P$ Prozessoren benötigt wird
+
+$T_P = min_x T_P(X)$
+
+
+
+
+
+
+Wie bereits zuvor beschrieben können Aufgaben eines Multithreading Programms abhängig von anderen Aufgaben sein. XY schlägt daher vor Multithreading Prgramme als gerichteten azyklischen Graphen (GAG) zu betrachten. Jede Aufgabe wird in einem solchen Graphen als Knoten dargestellt. Die möglichen Abhängigkeiten zwischen einzlnen Aufgaben werden als Kanten dargestellt. Dabei können mehrere Aufgaben je ein Successor bzw. Predessesor für eine andere Task sein.
+
+Eine Aufgabe kann nur dann gestartet werden, wenn auch alle Successoren für diese Task bereits ausgeführt wurden. 
+
+Um die Analyse eines parallelisierungsproblems zu vereinfachen wird im folgenden davon ausgegangen, dass jede Aufgabe genau gleich lange dauert und ein Prozessor aus genau einem Kern besteht.
+
+
+Basieren auf einem solchen Graph können diverse Werte ermittelt werden, die zur Analyse des Parallelisierungsproblems benötigt werden. 
+
+Die Durchlaufzeit (engl. ) bezeichnet die Anzahl der Schritte die ben
+
+
+
+
+
 Multithreaded computation can als directed acyclic graph (DAG) betrachtet werden. Dabei ist jede task ein Node. Diese nodes sind durch Kanten miteinander verbunden und representieren auf der einen seite den Predessor und auf der anderen den Successor einer tasks. Der successor hängt von dem Resultat des Predessesors ab. zB ist die conventinal Threads nur eine chain von Nodes wo jeder Node von einem anderen abhängt. Im gegensatz dazu hängt eine solche task von mehreren Subtasks ab.
 
 Einige Berechnungen lassen sich inherrently mehr parallelisieren als andere. Preziesergesagt nehmen wir an, dass alle indivual berechnungsschritte diese selbe Zeit dauern. Das wird als basis Masstatb genutzt. Sei also
