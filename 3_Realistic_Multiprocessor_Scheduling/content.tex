@@ -1,5 +1,12 @@
 \section{Realistic Multiprocessor Scheduling}
 
+
+Bisher wurde davon ausgegangen, dass alle Threads eines Multiprozessorprogramms auf $P$ dedizierten Prozessoren ausgeführt werden. In der Realität kann die Anzahl der Prozessoren, auf denen ein Programm ausgeführt wird, varriieren. Threads anderer Programmme oder des Betriebssystems selbst können ebenfalls auf den vorhandenen Prozessoren ausgeführt werden. Die Verteilung von Threads auf einzelne Prozessoren wird auf System Ebene von einem Schedluler übernommen. Er entscheidet zu welchem Zeitpunkt welcher Thread auf welchem Prozessor ausgeführt wird. Das Programm selbst hat keinen Einfluss darauf wie die Verteilung der Threads vorgenommen wird.
+
+
+
+
+
 Bisher sind wir davon ausgegangen, dass Mulithreading threads auf P dedizierten Prozessoren laufen. Das ist in der Realität nicht der fall. Nehme man an es stehen zu beginn P Prozessoren zur Verfügung, so kann wäherend des ausführens ein Prozesseor durch das System oder durch andere Programme genutzt werden somit stehen nicht wie ursprünglich P Prozessoren sondern nur noch P-1 Prozessoren zur verfügung.
 
 In modernen Betriebssystemen werden suer level threads that encompass a program counter and a stack. Auch mit eigenem address raum. Dann werden diese häfig als Prozesse benannt. Der OS kernel beinhaltet scheduler die die threads auf physischen Prozessoren laufen lassen. Das Mapping zwischen physischem Prozessor und Thread kann dabei nicht kontrolliert werden.
