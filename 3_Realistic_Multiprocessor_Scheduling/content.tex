@@ -1,27 +1,18 @@
 \section{Realistic Multiprocessor Scheduling}
 
-
-Bisher wurde davon ausgegangen, dass alle Threads eines Multiprozessorprogramms auf $P$ dedizierten Prozessoren ausgeführt werden. In der Realität kann die Anzahl der Prozessoren, auf denen ein Programm ausgeführt wird, varriieren. Threads anderer Programmme oder des Betriebssystems selbst können ebenfalls auf den vorhandenen Prozessoren ausgeführt werden. Die Verteilung von Threads auf einzelne Prozessoren wird auf System Ebene von einem Schedluler übernommen. Er entscheidet zu welchem Zeitpunkt welcher Thread auf welchem Prozessor ausgeführt wird. Das Programm selbst hat keinen Einfluss darauf wie die Verteilung der Threads vorgenommen wird.
-
+Dieser Abschnitt beschäftigt sich mit den in der Realität austretenden Herausforderungen, die bei der Implementierung eines Multi-Thread Programms entstehen. 
 
 
+In unserer Analyse von Multi-Thread-Programmen wurde bisher davon ausgegangen, dass jedes Programm auf $P$ dedizierten Prozessoren ausgeführt wird. Dies entspricht nicht der Realität. Multi-Thread-Programme werden in der Regel in Umgebungen ausgeführt in denen weitere Programme ablaufen. Es ist zu jedem beliebigen Zeitpunkt möglich, dass weitere Programme ausgeführt werden und Prozessoren belegen. Programme können durch das System unterbrochen werden, auf andere Ressourcen wie Festplatten waren müssen.
+Um diese externen Einflüsse zu verwalten werden User-Level Threads, also Threads die durch den User gestartet werden, mit Hilfe von Porgrammzählern und –stapeln verhwaltet. Die eigentliche Verteilung auf Prozesse geschieht durch System-Kernel Scheduler. Das Programm selbst hat keinen Einfluss wann und auf welchem Prozessor ein Thread ausgeführt wird.
+Die Brücke zwischen einer Aufgabe und dem Prozessor selbst, wird bei der Verwendung eines Multi-Thread-Programms unter der Verwendung von Aufgaben Pools auf drei Ebenen geschlagen. Wie in Abbildung 2 zu erkennen, werden Aufgaben aus einem Aufgaben-Pool per User-Level Scheduler an Threads verteilt. Diese Threads werden durch das System selbst wiederum mit Hilfe von Kernel-Level Scheduler auf Prozessoren verteilt.
+Trotz dessen, dass eine optimale Anzahl  an Threads (ein Thread pro Prozessor) erzeugt wird, kann nicht sichergestellt werden, dass auch die selbe Anzahl an Prozessoren dauerhaft mit der Bearbeitung dieser beschäftigt ist. Daher kann nur mit einer Durchschnittlichen Anzahl an Prozessoren gerechnet werden:
+
+$P_A = 1/T \sum (T-1) (i= 0) p_i$
+
+Um der Realtiät rechnung zu tragen, sollte ein User-Level-Scheduler so designet sein, dass er keine $P$-Fold Speedup sondern einen $P_A$ fold speedup erreicht. Ein schdule wird als greedy bezwichnet falls die Anzahl der Programm Schritte, das Minimum $p_i$ also die anzahl der Prozessor auslastet. In anderen Worten wenn das Programm so viele Schritte ausführt, wie auch zur ausführung bereit stehen.
+
+Theorem 16.3.1
 
 
-Bisher sind wir davon ausgegangen, dass Mulithreading threads auf P dedizierten Prozessoren laufen. Das ist in der Realität nicht der fall. Nehme man an es stehen zu beginn P Prozessoren zur Verfügung, so kann wäherend des ausführens ein Prozesseor durch das System oder durch andere Programme genutzt werden somit stehen nicht wie ursprünglich P Prozessoren sondern nur noch P-1 Prozessoren zur verfügung.
-
-In modernen Betriebssystemen werden suer level threads that encompass a program counter and a stack. Auch mit eigenem address raum. Dann werden diese häfig als Prozesse benannt. Der OS kernel beinhaltet scheduler die die threads auf physischen Prozessoren laufen lassen. Das Mapping zwischen physischem Prozessor und Thread kann dabei nicht kontrolliert werden.
-
-Dem entsprechend gibt um das loch zwischen user level threas und operationg system-evel prozessoren ein drei level modell: Auf der obersten Ebene das Multi-Threading programm. Die das Programm in short-lived tasks spaltet. Auf dem Mittleren Level die User-Level Schduler, die diese Tasks auf eine fixe Zahl von Threads mappen und auf dem unteren level der Kernal, der die Threads auf Hardware Prozessoren  mappen. Dabei kann die Applikation selbst keinen Einfluss auf den Kernel nehmen. 
-
-Zur vereinfachung kann man nnehemen, dass der kernel in diskreten schritten arbeitet. Bei Schritt i, der Kernal wählt eine subset von
-
-0 <= p_i <= P
-
-user Level Threads aus um in einem Schritt zu laufen
-
-Der Prozessor Durschnitt P_A
-über T schritte ist definiert als
-
-P_A = 1/T SUM T-1 i = 0 p_i
-
-... Hier noch mehr aus 16.3
+ 
