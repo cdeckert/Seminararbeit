@@ -15,7 +15,7 @@ Die Zeit, die zur Ausführung eines Programmes benötigt wird, lässt sich quant
 
 $T_P = min_x T_P(X)$.
 
-Da bei der Berechnung auf nur einem Prozessor $T_1$ in jedem Zeitabschnitt nur eine Aufgabe abgearbeitet werden kann, wird $T_1$ auch als _Arbeit_ bezeichnet. Da die Dauer der Berechnung auf \inf-Prozessoren durch den kritischen Pfad bestimmt ist, wird T_\inf auch als Berechnungstiefe bezeichnet.
+Da bei der Berechnung auf nur einem Prozessor $T_1$ in jedem Zeitabschnitt nur eine Aufgabe abgearbeitet werden kann, wird $T_1$ auch als _Arbeit_ bezeichnet. Da die Dauer der Berechnung auf \infty-Prozessoren durch den kritischen Pfad bestimmt ist, wird T_\infty auch als Berechnungstiefe bezeichnet.
 
 Einige Werte von $T$ werden speziell bezeichnet. So wird $T_1$, die Zeit zur Berechnung von allen Teilaufgaben auf einem einzelnen Prozessor auch als Arbeit bezeichnet. Sie ist, wenn man vereinfacht von einer konstanzen Zeit für jede Berechnung ausgeht, gleich der Anzahl der Berechnungsschritte. In einem Zeitschritt können $P$ Prozessoren maximal $P$ Berechnungsschritte durchführen so gilt: $T_P >= T_1/P$
 
@@ -23,7 +23,7 @@ Einige Werte von $T$ werden speziell bezeichnet. So wird $T_1$, die Zeit zur Ber
 Ein anderes Beispiel für eine solche Zahl ist der kritische Pfad der auch als... bezeichnet wird.
 
 
-Der Speedup auf $P$ Prozessoren wird als Ratio aus $T_1/T_P$. Dabei hat eine Berechnung einen linearen Speedup falls $T_1/T_P = O(P)$ ist. Der maximal erreichbare speedup ist $T_1/T_\inf$
+Der Speedup auf $P$ Prozessoren wird als Ratio aus $T_1/T_P$. Dabei hat eine Berechnung einen linearen Speedup falls $T_1/T_P = O(P)$ ist. Der maximal erreichbare speedup ist $T_1/T_\infty$
 
 
 
