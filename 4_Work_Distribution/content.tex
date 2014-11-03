@@ -1,5 +1,12 @@
 \section{Work Distribution}
 
+
+Wie im vohergehenden Kapitel angesprochen, kann die Anzahl der pro Thread bearbeiteten Threads varriieren. Um eine möglichst guten Speedup zu erreichen, ist ein Arbeits-Verteilungs-Algorithmus notwendig, der die einzelnen Threads optimal auslastet. Im folgenden wird das Konzept des Stehlens von Arbeit vorgestellt.
+
+
+
+
+
 Wir haben verstanden, dass der Schlüssel um eine gute Speedup zu bewaren, die möglichkeit ist auf User level Threads mit Tasks zu versorgen, daraus folgt dann eine greedy as possible distribution. Daher ist ein Work distribution algorithmus.
 
 Eine möglichkeit ist der Work dealing: Der überladene Thread versucht seine Taks an andere Threads abzugeben. Dieser Algorithmus wirkt im ersten Moment vorteilhaft. Näherbetrachtet stellt man fest, dass der bereits überladene Thread weiteren Aufwand dafür aufwenden muss seine Tasks an andere Threads abzugeben. Stattdessen verwenden wir Work trealing. In diesem Falle versucht ein Thread der out-of-work läuft Taks von anderen Threads zu stehelen. Die bereits laufenden threads verschwenden dadurch keinen Aufwand, um Ihre Tasks abzugeben.
