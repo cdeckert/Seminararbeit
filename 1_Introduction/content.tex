@@ -1,6 +1,36 @@
 \section{Einleitung}
 
 
+
+Der folgende Text beschäftigt sich mit der Zerlegung von bestimmten Aufgaben in Teilaufgaben, die parallel ausgeführt werden können. Es wird das Konzept eines Futures eingeführt, die Art des Schduling auf User und System Ebene besprochen, sowie ein Ansatz zur Arbeitsverteilung vorgestellt. ...
+
+Im Folgenden wird gezeigt wie Aufgaben in Teilaufgaben zerlegt und dann von mehreren Threads erledigt werden können. Die Auswahl des optimalen Zerlegungsmodells hängt dabei von der Art der Aufgabe ab. Einige Aufgaben lassen sich natürlich in mehrere Threads zerlegen. Beispielsweise sind Webserver prädestiniert dazu pro Request einen eigenen Thread zu starten. Wiederum andere Probleme tendieren dazu sich einfach in Consumer und Producer einteilen zu lassen. In diesem Text sollen Aufgaben betrachtet werden, denen eine Parallelisierbarkeit innewohnt, aber bei denen eine einfache Lösung nicht offensichtlich ist.
+Als Beispiel für eine solche Aufgabe soll die Berechnung einer Finbonacci Zahl nach dem in Abbildung 1 beschriebenen Code dienen. 
+
+$
+output: fib von X
+input:(X)
+IF X > 1 
+	Return fib(X-1) + Fib(X-2)
+Else
+	Return 1
+$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Der folgende Text beschäftigt sich mit der Zerlegung von Problemen in einzelne Komponenten, die parallel ausgeführt werden können. Dabei werden die daraus entstehenden Herausforderungen und Lösungen aufgezeigt.
 
 Bei der Parallelisierbarkeit von Programmen lässt sich grob zwischen drei Arten von Problemen unterscheiden. (1) Probleme, die sich natürlich in einzelne Threads aufteilen. Zu diesen zählen beispielsweise Web-Server, die pro Request einen eigenen Thread starten können. (2) Producer-Consumer-Probleme bei denenen Ergebnisse von einem Producer generiert werden und von einem Konsumenten verarbeitet werden. Im folgenden Text konzentrieren wir uns auf Probleme, deren Möglichkeit zur Parallelisierung in ihnen selbst innewohnt.
