@@ -18,7 +18,36 @@
 \tableofcontents
 \newpage
 \setcounter{page}{1}
-\input{./content.tex}
+
+
+\section{Einleitung}
+
+\section{Motivation}
+
+\section{Verteilung von Tasks}
+
+Zugverteilung von Aufgaben werden im folgenden drei unterschiedliche Algorithmen vorgestellt.
+
+
+\subsection{Work Distribution}
+
+Ein möglicher Ansatz zur Verteilung von Tasks während der Ausführung eines Programms ist die WorkDistribution. Bei diesem Verfahren, werden jedem Thread zu Beginn eine Menge an Tasks zugeteilt. Alle Threads bearbeiten die ihnen zugewiesenen Aufgaben. Immer wieder unterbrechen die einzelnen Threads die Bearbeitung und prüfen, ob alle anderen Threads genügend ausgelastet sind, oder ob die bereits alle Aufgaben abgearbeitet haben. Falls ein Thread entdeckt wird, der droht arbeitslos zu werden oder bereits ist, weisst der bereits beschäftigte Thread diesem einige seiner Aufgaben zu. So ist es allen Threads möglich ihre Arbeitsbelastung auf andere Threads abzuwälzen. 
+
+Dieses Verfahren birgt jedoch einige Nachteile. So obliegt es dem bereits beschäftigten Thread neben seiner eigentlichen Hauptaufgabe, der Bearbeitung von Tasks, auch eine Umverteilung von Aufgaben vorzunehmen. Durch diesen Vorgang wird die mögliche Arbeitsleistung eines beschäftigten Threads belastet, obwohl ein anderer wenig bzw. nicht ausgelasteter Thread auf die Zuteilung wartet.
+
+
+\subsection{Work Stealing}
+
+Die Nachteile der Work Distribution werden durch das Work Stealing gelöst. Bei diesem Verfahren werden den einzelnen Threads von Beginn an eine Menge an Aufgaben zugewiesen. Die einzelnen Threads bearbeiten die ihnen zugewiesen Tasks. Sobald ein Thread alle eigenen Aufgaben abgearbeitet hat und droht arbeitslos zu werden, geht er auf die Suche nach neuer Arbeit. Hierzu wählt der arbeitslose Thread zufällig eine anderen Thread aus, dort prüft er, ob der Thread noch unbearbeitete Tasks vorrätig hat. Ist das der Fall übernimmt der Arbeitssuchende die externe Task und macht sie zu seiner eigenen Aufgabe. Trifft ein Arbeitssuchender Thread auf einen anderen Arbeitssuchenden, so setzt er die Suche fort.
+
+Zu den Vorteilen dieses Verfahrens zählen, dass beschäftigte Threads während in ihrer Arbeit nicht unterbrochen werden und somit die maximale Geschwindigkeit zur Ausführung der Tasks nutzen kann. Ebenfalls stehen arbeitslose Threads nicht still bis sie eine neue Aufgabe für sich gefunden haben auch ihre Leerlaufzeiten können so optimal genutzt werden.
+
+
+\subsection{Work Balancing}
+
+Neben den bereits besprochenen Verfahren Work Distribution und Work Stealing ist die zentrale Arbeitsverteilung “Work Balancing” eine weitere Möglichkeit, um Tasks effizient zu verteilen. 
+
+
 
 %\input{./2_Analyzing_Parallelism/content.tex}
 %\input{./3_Realistic_Multiprocessor_Scheduling/content.tex}
