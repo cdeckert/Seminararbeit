@@ -1,10 +1,14 @@
 % In your .tex file
 % !TEX program = xelatex
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\documentclass[11pt,a4paper,oneside]
-\inputencoding{utf8}
+\usepackage[ngerman]{babel}
+%\documentclass[12pt,a4paper,oneside]
+\usepackage{pstricks,pst-node,pst-tree}
+
 \begin{document}
+\bibliographystyle{plain}
+
 
 \title{Ein Draft}
 \date{}
@@ -14,10 +18,11 @@
 \tableofcontents
 \newpage
 \setcounter{page}{1}
-\input{./1_Introduction/content.tex}
-\input{./2_Analyzing_Parallelism/content.tex}
-\input{./3_Realistic_Multiprocessor_Scheduling/content.tex}
-\input{./4_Work_Distribution/content.tex}
-\input{./5_Work_Stealing_Dequeues/content.tex}
+\input{./content.tex}
+
+%\input{./2_Analyzing_Parallelism/content.tex}
+%\input{./3_Realistic_Multiprocessor_Scheduling/content.tex}
+%\input{./4_Work_Distribution/content.tex}
+%\input{./5_Work_Stealing_Dequeues/content.tex}
 
 \end{document}
